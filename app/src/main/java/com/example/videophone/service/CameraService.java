@@ -1,6 +1,7 @@
 package com.example.videophone.service;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -13,12 +14,17 @@ import android.media.MediaCodecInfo;
 import android.media.MediaFormat;
 import android.os.Build;
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
+import android.app.Service;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+
+import com.example.videophone.utils.BaseBinder;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -27,7 +33,7 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class CameraService {
+public class CameraService extends Service {
     public static final String LOG_TAG = CameraService.class.getName();
 
     public static TextureView view;
@@ -170,6 +176,12 @@ public class CameraService {
         //mCodec.setCallback(new EncoderCallback());
         mCodec.start(); // запускаем кодер
         Log.i(LOG_TAG, "запустили кодек");
+    }
+
+    @NonNull
+    @Override
+    public IBinder onBind(Intent intent) {
+        return new BaseBinder<>(this, LocationService.class);
     }
 
     public class EncoderCallback extends MediaCodec.Callback {
