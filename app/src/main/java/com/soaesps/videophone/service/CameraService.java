@@ -1,4 +1,4 @@
-package com.example.videophone.service;
+package com.soaesps.videophone.service;
 
 import android.Manifest;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
-import com.example.videophone.utils.BaseBinder;
+import com.soaesps.videophone.utils.BaseBinder;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
